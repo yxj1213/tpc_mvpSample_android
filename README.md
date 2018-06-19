@@ -45,9 +45,4 @@
 
 1. [RxBus](http://wuxiaolong.me/2016/04/07/rxbus/)
 
-# 联系我
-我的微信公众号：吴小龙同学，欢迎交流。
-
-![](http://7q5c2h.com1.z0.glb.clouddn.com/qrcode_wuxiaolong.jpg)
-
 
