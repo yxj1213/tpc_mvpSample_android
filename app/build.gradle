@@ -5,7 +5,7 @@ android {
     compileSdkVersion 27
 
     defaultConfig {
-        /*applicationId "com.wuxiaolong.androidmvpsample"*/
+        applicationId "com.wuxiaolong.androidmvpsample"
         minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
@@ -31,15 +31,16 @@ task makeJar(type: Copy) {
 makeJar.dependsOn(build)
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation ("com.wuxiaolong.androidutils:androidutils:$androidutilsVersion"){transitive=true}
-    implementation "com.android.support:appcompat-v7:$appcompatVersion"
+    implementation ("com.wuxiaolong.androidutils:androidutils:$androidutilsVersion")
     annotationProcessor  "com.jakewharton:butterknife-compiler:$butterknifeVersion"
-    compile ("com.squareup.retrofit2:retrofit:2.0.0-beta3"){transitive=true}
-    implementation ("com.squareup.okhttp3:logging-interceptor:$logginginterceptor"){transitive=true}
-    implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion"){transitive=true}
-    implementation ("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"){transitive=true}
-    implementation ("io.reactivex.rxjava2:rxandroid:$rxandroidVersion"){transitive=true}
-    implementation ("io.reactivex.rxjava2:rxjava:$rxjavaVersion"){transitive=true}
+    compile ("com.squareup.retrofit2:retrofit:2.0.0-beta3")
+    implementation ("com.squareup.okhttp3:logging-interceptor:$logginginterceptor")
+    implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation ("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion")
+    implementation ("io.reactivex.rxjava2:rxandroid:$rxandroidVersion")
+    implementation ("io.reactivex.rxjava2:rxjava:$rxjavaVersion")
      //沉浸式
-    compile ('com.readystatesoftware.systembartint:systembartint:1.0.3'){transitive=true}
+    compile ('com.readystatesoftware.systembartint:systembartint:1.0.3')
+    compile 'com.android.support:appcompat-v7:24.0.0'
+    compile 'com.android.support:design:24.0.0'
 }
