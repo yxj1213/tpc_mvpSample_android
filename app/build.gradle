@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+/*apply plugin: 'com.android.library'*/
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        /*applicationId "com.wuxiaolong.androidmvpsample"*/
+        minSdkVersion 17
+        targetSdkVersion 27
+        versionCode 1
+    }
+}
+
+ext {
+    androidutilsVersion = '1.0.6'
+    appcompatVersion = '27.1.0'
+    butterknifeVersion = '8.4.0'
+    retrofitVersion = '2.3.0'
+    logginginterceptor = '3.9.1'
+    rxjavaVersion = '2.1.11'
+    rxandroidVersion = "2.0.2"
+}
+task makeJar(type: Copy) {
+    delete 'build/libs/mylibrary.jar' //删除已经存在的jar包
+    from('build/intermediates/bundles/release/')//从该目录下加载要打包的文件
+    into('build/libs/')//jar包的保存目录
+    include('classes.jar')//设置过滤，只打包classes文件
+    rename('classes.jar', 'mylibrary.jar')//重命名，mylibrary.jar 根据自己的需求设置
+}
+makeJar.dependsOn(build)
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation ("com.wuxiaolong.androidutils:androidutils:$androidutilsVersion"){transitive=true}
+    implementation "com.android.support:appcompat-v7:$appcompatVersion"
+    annotationProcessor  "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+    compile ("com.squareup.retrofit2:retrofit:2.0.0-beta3"){transitive=true}
+    implementation ("com.squareup.okhttp3:logging-interceptor:$logginginterceptor"){transitive=true}
+    implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion"){transitive=true}
+    implementation ("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"){transitive=true}
+    implementation ("io.reactivex.rxjava2:rxandroid:$rxandroidVersion"){transitive=true}
+    implementation ("io.reactivex.rxjava2:rxjava:$rxjavaVersion"){transitive=true}
+     //沉浸式
+    compile ('com.readystatesoftware.systembartint:systembartint:1.0.3'){transitive=true}
+}
