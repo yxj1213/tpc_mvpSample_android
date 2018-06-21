@@ -1,4 +1,4 @@
-package com.wuxiaolong.androidmvpsample.common.util;
+package com.tpc.androidmvpsample.common.util;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,8 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wuxiaolong.androidmvpsample.R;
-
+import com.tpc.androidmvpsample.R;
 
 /**
  * Created by moon.zhong on 2015/6/12.

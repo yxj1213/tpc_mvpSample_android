@@ -1,9 +1,11 @@
 package com.wuxiaolong.androidmvpsample.demo.presenter;
 
-import com.wuxiaolong.androidmvpsample.common.mvp.presenter.BasePresenter;
+import com.tpc.androidmvpsample.common.mvp.presenter.BasePresenter;
+import com.tpc.androidmvpsample.common.retrofit.ApiCallback;
+import com.tpc.androidmvpsample.common.retrofit.ApiClient;
+import com.wuxiaolong.androidmvpsample.demo.ApiStores;
 import com.wuxiaolong.androidmvpsample.demo.module.MainModel;
 import com.wuxiaolong.androidmvpsample.demo.view.MainView;
-import com.wuxiaolong.androidmvpsample.common.retrofit.ApiCallback;
 
 /**
  * Created by WuXiaolong on 2015/9/23.
@@ -13,13 +15,16 @@ import com.wuxiaolong.androidmvpsample.common.retrofit.ApiCallback;
  */
 public class MainPresenter extends BasePresenter<MainView> {
 
+    protected ApiStores apiStores;
     public MainPresenter(MainView view) {
         attachView(view);
+        apiStores = ApiClient.retrofit().create(ApiStores.class);
+
     }
 
     public void loadDataByRetrofitRxjava(String cityId, final String type) {
         mvpView.showLoading();
-        addSubscription(apiStores.loadDataByRetrofitRxJava(cityId), new ApiCallback<MainModel>() {
+        addSubscription(apiStores.loadDataByRetrofitRxJava(cityId),  new ApiCallback<MainModel>() {
             @Override
             public void onSuccess(MainModel model) {
                 mvpView.getDataSuccess(model,type);

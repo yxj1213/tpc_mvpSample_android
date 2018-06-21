@@ -1,5 +1,6 @@
 package com.wuxiaolong.androidmvpsample.demo;
 
+
 import com.wuxiaolong.androidmvpsample.demo.module.MainModel;
 
 import io.reactivex.Observable;
@@ -7,7 +8,6 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-
 
 public interface ApiStores {
     //baseUrl

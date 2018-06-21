@@ -1,8 +1,5 @@
-package com.wuxiaolong.androidmvpsample.common.mvp.presenter;
+package com.tpc.androidmvpsample.common.mvp.presenter;
 
-
-import com.wuxiaolong.androidmvpsample.common.retrofit.ApiClient;
-import com.wuxiaolong.androidmvpsample.demo.ApiStores;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -13,12 +10,12 @@ import io.reactivex.schedulers.Schedulers;
 
 public class BasePresenter<V> {
     public V mvpView;
-    protected ApiStores apiStores;
+//    protected ApiStores apiStores;
     private CompositeDisposable mCompositeDisposable;
 
     public void attachView(V mvpView) {
         this.mvpView = mvpView;
-        apiStores = ApiClient.retrofit().create(ApiStores.class);
+//        apiStores = ApiClient.retrofit().create(ApiStores.class);
     }
 
 

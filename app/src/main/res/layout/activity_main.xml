@@ -5,8 +5,6 @@
     android:orientation="vertical"
     tools:context=".demo.MainActivity">
 
-    <include layout="@layout/toolbar" />
-
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
@@ -18,7 +16,7 @@
         android:text="@string/text2" />
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/texts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp" />

@@ -1,6 +1,6 @@
 package com.wuxiaolong.androidmvpsample.demo.view;
 
-import com.wuxiaolong.androidmvpsample.common.mvp.view.BaseView;
+import com.tpc.androidmvpsample.common.mvp.view.BaseView;
 import com.wuxiaolong.androidmvpsample.demo.module.MainModel;
 
 /**

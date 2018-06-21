@@ -1,4 +1,4 @@
-package com.wuxiaolong.androidmvpsample.common.retrofit;
+package com.tpc.androidmvpsample.common.retrofit;
 
 
 import com.wuxiaolong.androidutils.library.LogUtil;

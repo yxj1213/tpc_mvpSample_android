@@ -1,7 +1,8 @@
-package com.wuxiaolong.androidmvpsample.common.retrofit;
+package com.tpc.androidmvpsample.common.retrofit;
 
-import com.wuxiaolong.androidmvpsample.BuildConfig;
-import com.wuxiaolong.androidmvpsample.demo.ApiStores;
+
+import com.tpc.androidmvpsample.BuildConfig;
+import com.tpc.androidmvpsample.common.mvp.view.BaseActivity;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -25,7 +26,7 @@ public class ApiClient {
             }
             OkHttpClient okHttpClient = builder.build();
             mRetrofit = new Retrofit.Builder()
-                    .baseUrl(ApiStores.API_SERVER_URL)
+                    .baseUrl(BaseActivity.url)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(okHttpClient)

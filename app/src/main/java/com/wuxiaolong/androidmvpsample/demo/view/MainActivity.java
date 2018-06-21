@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.tpc.androidmvpsample.common.mvp.view.MvpActivity;
 import com.wuxiaolong.androidmvpsample.R;
 import com.wuxiaolong.androidmvpsample.demo.module.MainModel;
 import com.wuxiaolong.androidmvpsample.demo.presenter.MainPresenter;
-import com.wuxiaolong.androidmvpsample.common.mvp.view.MvpActivity;
 
 /**
  * 由Activity/Fragment实现View里方法，包含一个Presenter的引用
@@ -20,13 +20,31 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
     private TextView text;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        text = findViewById(R.id.text);
+        text = (TextView) findViewById(R.id.texts);
         setCenterText(getString(R.string.title));
+
+        initUpdate();
     }
+//版本更新
+    private void initUpdate() {
+//        //最简方式
+//        new UpdateAppManager
+//                .Builder()
+//                //当前Activity
+//                .setActivity(this)
+//                //更新地址
+//                .setUpdateUrl(mUpdateUrl)
+//                //实现httpManager接口的对象
+//                .setHttpManager(new UpdateAppHttpUtil())
+//                .build()
+//                .update();
+    }
+
     @Override
     protected MainPresenter createPresenter() {
         return new MainPresenter(this);
@@ -53,6 +71,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
         }
     }
+
     private void dataSuccess(MainModel model) {
         MainModel.WeatherinfoBean weatherinfo = model.getWeatherinfo();
         String showData = getResources().getString(R.string.city) + weatherinfo.getCity()

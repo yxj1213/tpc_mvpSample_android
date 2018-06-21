@@ -1,4 +1,4 @@
-package com.wuxiaolong.androidmvpsample.common.mvp.view;
+package com.tpc.androidmvpsample.common.mvp.view;
 
 
 import android.app.Activity;

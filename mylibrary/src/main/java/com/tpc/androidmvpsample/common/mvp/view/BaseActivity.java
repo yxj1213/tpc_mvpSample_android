@@ -1,4 +1,4 @@
-package com.wuxiaolong.androidmvpsample.common.mvp.view;
+package com.tpc.androidmvpsample.common.mvp.view;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -16,10 +16,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
-import com.wuxiaolong.androidmvpsample.R;
-import com.wuxiaolong.androidmvpsample.common.retrofit.ApiClient;
-import com.wuxiaolong.androidmvpsample.common.util.ToolBarUtil;
-import com.wuxiaolong.androidmvpsample.demo.ApiStores;
+import com.tpc.androidmvpsample.R;
+import com.tpc.androidmvpsample.common.util.ToolBarUtil;
 import com.wuxiaolong.androidutils.library.LogUtil;
 
 import java.util.ArrayList;
@@ -38,15 +36,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     public Activity mActivity;
     private CompositeDisposable mCompositeDisposable;
     private List<Call> calls;
-    private ToolBarUtil mToolBarHelper ;
-    public Toolbar toolbar ;
+    private ToolBarUtil mToolBarHelper;
+    public Toolbar toolbar;
+    public static String url="http://www.weather.com.cn/";
+
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
         mActivity = this;
         //实现沉浸式主题风格
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-        {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
                     | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
@@ -56,10 +55,9 @@ public abstract class BaseActivity extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
             window.setNavigationBarColor(Color.TRANSPARENT);
-        }else{
+        } else {
             //实现沉浸式主题风格
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 setTranslucentStatus(true);
             }
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
@@ -68,34 +66,33 @@ public abstract class BaseActivity extends AppCompatActivity {
             tintManager.setStatusBarTintResource(R.color.transparent);
         }
 
-        if (isShowToolBar())
-        {
-            mToolBarHelper = new ToolBarUtil(this,layoutResID) ;
-            toolbar = mToolBarHelper.getToolBar() ;
+        if (isShowToolBar()) {
+            mToolBarHelper = new ToolBarUtil(this, layoutResID);
+            toolbar = mToolBarHelper.getToolBar();
             setContentView(mToolBarHelper.getContentView());
             //*把 toolbar 设置到Activity 中*//*
             setSupportActionBar(toolbar);
             //*自定义的一些操作*//*
-            onCreateCustomToolBar(toolbar) ;
-        }else {
+            onCreateCustomToolBar(toolbar);
+        } else {
             super.setContentView(layoutResID);
         }
     }
+
     /**
-     *向子类提供一个可调用的方法，来控制是否显示ToolBar
+     * 向子类提供一个可调用的方法，来控制是否显示ToolBar
      * true:代表子类用的就是弗雷的ToolBar
      * false:意思就是子类不需要父类的ToolBar,子类自己去实现吧
      */
-    protected boolean isShowToolBar(){
+    protected boolean isShowToolBar() {
         return true;
     }
+
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
         //实现沉浸式主题风格
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-        {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setTranslucentStatus(true);
         }
         SystemBarTintManager tintManager = new SystemBarTintManager(this);
@@ -103,57 +100,55 @@ public abstract class BaseActivity extends AppCompatActivity {
         //设置沉浸的颜色
         tintManager.setStatusBarTintResource(R.color.transparent);
     }
+
     //设置中间的文字
-    public void setCenterText(String text){
+    public void setCenterText(String text) {
         setTitle("");
         mToolBarHelper.setCenterText(text);
     }
 
     //设置右边的文字
-    public void setRightText(String text){
+    public void setRightText(String text) {
         mToolBarHelper.setRightText(text);
     }
 
     //设置右边的图片
-    public void setRightImg(int resId){
+    public void setRightImg(int resId) {
         mToolBarHelper.setRightImg(resId);
     }
 
     //设置右侧文字单击事件
-    public void setRightTextClick(View.OnClickListener rightTextClick){
+    public void setRightTextClick(View.OnClickListener rightTextClick) {
         mToolBarHelper.setRightTextClick(rightTextClick);
     }
 
     //设置图片右侧单击事件
-    public void setRightImgClick(View.OnClickListener rightImgClick){
+    public void setRightImgClick(View.OnClickListener rightImgClick) {
         mToolBarHelper.setRightImgClick(rightImgClick);
     }
+
     //设置toolbar关闭界面
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        if (item.getItemId() == android.R.id.home)
-        {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void onCreateCustomToolBar(Toolbar toolbar){
-        toolbar.setContentInsetsRelative(0,0);
+    public void onCreateCustomToolBar(Toolbar toolbar) {
+        toolbar.setContentInsetsRelative(0, 0);
     }
+
     @TargetApi(19)
-    public void setTranslucentStatus(boolean on)
-    {
+    public void setTranslucentStatus(boolean on) {
         Window win = getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
         final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        if (on)
-        {
+        if (on) {
             winParams.flags |= bits;
-        } else
-        {
+        } else {
             winParams.flags &= ~bits;
         }
         win.setAttributes(winParams);
@@ -179,11 +174,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public ApiStores apiStores() {
-        //创建我们的 API 接口对象，这里 ApiStores 是我们创建的接口：
-        return ApiClient.retrofit().create(ApiStores.class);
-    }
-
     public void addCalls(Call call) {
         if (calls == null) {
             calls = new ArrayList<>();
@@ -201,9 +191,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-/**
- * observable 被观察者
- * */
+    /**
+     * observable 被观察者
+     */
     public <T> void addSubscription(Observable<T> observable, DisposableObserver<T> observer) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();
